@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='mainpage.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class=main>
+        <div class="hcontainer">
+        <form class=container action="/logout" method="post">
+            <input type="submit" class="btn btn-primary" value="Log-out">
+        </form>
+        <form class=container action="/createrecipe">
+            <input type="submit" class="btn btn-primary" value="Create Recipe">
+        </form>
+        <form class=container action="/dashboard">
+            <input type="submit" class="btn btn-primary" value="Back to All Recipes">
+        </form>
+        </div>
+    </div>
+    <div class=main>
+        <form action="/editrecipe"method='post'>
+            <input type="hidden" value="{{this_recipe.id}}" name ="id">
+            <Label for="name">Recipe Name:</Label>
+            <input type="text"value="{{this_recipe.name}}" name="name" class="form-control">
+            <Label for="description">Description:</Label>
+            <input type="text" value="{{this_recipe.description}}" name="description" class="form-control">
+            <Label for="instructions">Instructions:</Label>
+            <input type="text" value="{{this_recipe.instructions}}" name="instructions" class="form-control">
+            <div class=hcontainer>
+                <Label for="under_thirty">Can this be made in under 30 minutes?:</Label>
+                <input type="radio" name="under_thirty" value="yes" id="yes" checked class="form-check-input">
+                <label for="yes">Yes</label>
+                <input type="radio" name="under_thirty" value="no" id="no" class="form-check-input">
+                <label for="no">No</label>
+            </div>
+            <input type="submit"class="btn btn-primary" value="Update Recipe">
+        </form>
+    </div>
+        
+        
+</body>
+</html>

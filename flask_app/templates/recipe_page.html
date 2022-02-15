@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='mainpage.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class=main>
+        <h1>Welcome Back {{user.first_name}}!</h1>
+        <div class="hcontainer">
+        <form class=container action="/logout" method="post">
+            <input type="submit" class="btn btn-primary" value="Log-out">
+        </form>
+        <form class=container action="/createrecipe">
+            <input type="submit" class="btn btn-primary" value="Create Recipe">
+        </form>
+        <form class=container action="/dashboard">
+            <input type="submit"class="btn btn-primary" value="Back to All Recipes">
+        </form>
+        </div>
+    </div>
+    <div class=main>
+        <table class="table table-striped">
+            <tr>
+                <th>Recipe Name:</th>
+                <th>Description:</th>
+                <th>Instructions:</th>
+                <th>Under 30 Minutes?</th>
+                <th>Created by:</th>
+            </tr>
+            
+            <tr>
+                <td>{{this_recipe.name}}</td>
+                <td>{{this_recipe.description}}</td>
+                <td>{{this_recipe.instructions}}</td>
+                <td>{{this_recipe.under_thirty}}</td>
+                <td>{{creator.first_name}} {{creator.last_name}}</td>
+            </tr>
+        </table>
+    </div>
+        
+        
+</body>
+</html>
