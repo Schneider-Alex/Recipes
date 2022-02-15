@@ -14,14 +14,19 @@ def trasnfer_to_recipe_page():
 
 @app.route('/recipes/new',methods=['POST'])
 def newrecipe():
-    data={
-        'name':request.form['name'],
-        'description':request.form['description'],
-        'instructions':request.form['instructions'],
-        'under_thirty':request.form['under_thirty'],
-        'users_id':session['id'],
-    }
-    recipe.Recipe.save_new_recipe(data)
+    if not recipe.Recipe.validate_recipe(request.form):
+        return redirect('/createrecipe')
+    else:
+        data={
+            'name':request.form['name'],
+            'description':request.form['description'],
+            'instructions':request.form['instructions'],
+            'under_thirty':request.form['under_thirty'],
+            'users_id':session['id'],
+        }
+        recipe.Recipe.save_new_recipe(data)
+    
+    
     return redirect('/dashboard')
 
 @app.route('/recipe/delete/<recipeid>')

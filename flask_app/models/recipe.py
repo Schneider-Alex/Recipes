@@ -17,7 +17,28 @@ class Recipe:
         self.updated_at = data['updated_at']
         self.users_id = data['users_id']
 
-
+    @staticmethod
+    def validate_recipe(form):
+        is_valid = True
+        query = """SELECT * FROM recipes WHERE name =  %(name)s"""
+        data= {
+            'name':form['name']
+        }
+        results = connectToMySQL('recipes_schema').query_db(query,data)
+        if results:
+            flash("recipe name exists!")
+            is_valid = False
+        if len(form['name']) < 3:
+            flash("Recipe Name must be 3 Characters!")
+            is_valid = False
+        if len(form['instructions']) <  3:
+            flash("Instructions must be 3 Characters!")
+            is_valid = False
+        if len(form['description']) <  3:
+            flash("Description must be 3 Characters!")
+            is_valid = False
+        return is_valid
+        
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM recipes;"
