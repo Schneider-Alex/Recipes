@@ -44,12 +44,17 @@ class Recipe:
         query = "SELECT * FROM recipes;"
         results = connectToMySQL('recipes_schema').query_db(query)
         recipes = []
-        if len(results)<1:
-            return recipes
-        else:
+        # if len(results)<1:
+        #     return recipes
+        # else:
+        #     for recipe in results:
+        #         recipes.append( cls(recipe)) 
+        #     return recipes
+
+        if not len(results)<1:
             for recipe in results:
                 recipes.append( cls(recipe)) 
-            return recipes
+        return recipes
         
     @classmethod
     def get_one_recipe(cls, data):

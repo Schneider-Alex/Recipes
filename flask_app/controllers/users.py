@@ -43,7 +43,7 @@ def dashboardpage():
                 'id' : session['id']
             }
     all_recipes = recipe.Recipe.get_all()
-    return render_template('dashboard.html',user=user.User.get_one(data),all_recipes=all_recipes)
+    return render_template('dashboard.html',user=user.User.get_one(session),all_recipes=all_recipes)
 
 @app.route('/logout', methods=['POST','GET'])
 def logout():

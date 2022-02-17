@@ -36,7 +36,7 @@ class User:
             flash("First Name must be 3 Characters!")
             is_valid = False
         if len(form['last_name']) <  3:
-            flash("First Name must be 3 Characters!")
+            flash("Last Name must be 3 Characters!")
             is_valid = False
         return is_valid
 
