@@ -26,19 +26,23 @@ class User:
         is_valid = True
         query = """SELECT * FROM users WHERE email =  %(email)s"""
         results = connectToMySQL('recipes_schema').query_db(query, form)
+        errors=[]
         if len(results) >= 1:
-            flash("email address already in use!")
+            errors.append("email address already in use!")
             is_valid = False
         elif not EMAIL_REGEX.match(form['email']): 
-            flash("Invalid email address!")
+            errors.append("Invalid email address!")
             is_valid = False
         if len(form['first_name']) < 3:
-            flash("First Name must be 3 Characters!")
+            errors.append("First Name must be 3 Characters!")
             is_valid = False
         if len(form['last_name']) <  3:
-            flash("Last Name must be 3 Characters!")
+            errors.append("Last Name must be 3 Characters!")
             is_valid = False
-        return is_valid
+        if form['passwordcheck'] !=  form['password']:
+            errors.append('passwords do not match!')
+            is_valid = False
+        return is_valid , errors
 
     @classmethod
     def get_all(cls):

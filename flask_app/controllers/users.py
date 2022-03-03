@@ -14,14 +14,9 @@ def homepage():
 @app.route('/saveuser', methods=['POST'])
 def adduser():
     if not user.User.validate_account(request.form):
-        return redirect('/')
+        return jsonify(user.User.validate_account)
     else:
-        if request.form['passwordcheck'] !=  request.form['password']:
-            flash('passwords do not match!')
-            return redirect('/')
-        else:
-            user.User.save(request.form)
-    return redirect('/')
+        return redirect('/')
 
 @app.route('/login', methods=['POST'])
 def login():
